@@ -1,0 +1,17 @@
+const { test, expect } = require('@playwright/test')
+
+test('Add Item to cart', async ({ page }) => {
+    await page.goto('https://www.saucedemo.com/v1/inventory.html')
+    await page.waitForTimeout(3000)
+    await page.locator('.inventory_list > :nth-child(4)').hover()
+    await page.click('.inventory_list > :nth-child(4) .btn_primary')
+    await page.waitForTimeout(3000)
+    await page.locator('.inventory_list > :nth-child(2)').hover()
+    await page.click('.inventory_list > :nth-child(2) .btn_primary')
+    await page.waitForTimeout(1000)
+    await page.evaluate(() => window.scrollTo(0, 0))
+    await page.click('#shopping_cart_container > a > svg > path')
+    await page.waitForTimeout(1000)
+    await expect(page.locator('#cart_contents_container')).toContainText('Sauce Labs Fleece Jacket')
+    await expect(page.locator('#cart_contents_container')).toContainText('Sauce Labs Bike Light')   
+})

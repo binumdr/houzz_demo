@@ -1,0 +1,15 @@
+const { test, expect } = require('@playwright/test')
+
+test('Filter Products by Size and Price', async ({ page }) => {
+    await page.goto('https://www.saucedemo.com/v1/inventory.html')
+    await page.selectOption('.product_sort_container', 'za')
+    await page.waitForTimeout(5000)
+    await expect(page.locator('.inventory_list')).toBeVisible()
+    await page.waitForTimeout(5000)
+    await expect(page.locator('#item_3_title_link > .inventory_item_name')).toContainText('Test.allTheThings() T-Shirt (Red)')
+    await page.selectOption('.product_sort_container', 'lohi')
+    await page.waitForTimeout(5000)
+    await expect(page.locator('.inventory_list')).toBeVisible()
+    await page.waitForTimeout(1000)
+    await expect(page.locator('#item_2_title_link > .inventory_item_name')).toContainText('Sauce Labs Onesie')
+})
