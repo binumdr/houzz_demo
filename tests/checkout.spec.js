@@ -1,7 +1,6 @@
 const { test, expect } = require('@playwright/test');
 
-test.describe('Checkout Tests', () => {
-  test('Perform Checkout', async ({ page }) => {
+test('Perform Checkout', async ({ page }) => {
     await page.goto('https://www.saucedemo.com/v1/inventory.html')
     await page.locator('.inventory_list > :nth-child(4)').hover()
     await page.click('.inventory_list > :nth-child(4) .btn_primary')
@@ -24,7 +23,6 @@ test.describe('Checkout Tests', () => {
     await page.locator('.cart_footer').hover()
     await page.click('.btn_action')
     await expect(page).toHaveURL(/.*\/checkout-complete/)
-    await expect(page.locator('.complete-header')).toBeVisible()
-    await expect(page.locator('.complete-header')).toContainText('THANK YOU FOR YOUR ORDER')
-  });
-});
+     await expect(page.locator('.complete-header')).toBeVisible()
+     await expect(page.locator('.complete-header')).toContainText('THANK YOU FOR YOUR ORDER')
+})

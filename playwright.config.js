@@ -1,6 +1,13 @@
 // @ts-check
 const { defineConfig, devices } = require('@playwright/test');
 
+module.exports = defineConfig({
+  reporter: [['list'], ['allure-playwright']],
+  use: {
+    headless: false, // Show the browser UI for debugging
+    viewport: { width: 1280, height: 720 },
+  },
+})
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
@@ -12,6 +19,7 @@ const { defineConfig, devices } = require('@playwright/test');
  */
 module.exports = defineConfig({
   testDir: './tests',
+
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -30,6 +38,7 @@ module.exports = defineConfig({
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
   },
+  
 
   /* Configure projects for major browsers */
   projects: [
@@ -76,4 +85,6 @@ module.exports = defineConfig({
   //   reuseExistingServer: !process.env.CI,
   // },
 });
+
+
 
